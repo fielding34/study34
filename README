@@ -1,0 +1,12 @@
+#WEB学习笔记
+
+##git 入门：
+====
+```
+touch README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/fielding34/study34.git
+git push -u origin master
+```
