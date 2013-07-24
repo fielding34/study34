@@ -1,0 +1,52 @@
+<!doctype>
+<html ng-app="app">
+<head>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="angular/1.1.5/angular.min.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+<style>
+​.ng-invalid { border: 1px solid red; }​
+.example-leave, .example-enter {
+	-webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+	-moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+	-ms-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+	-o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+	transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+}
+
+.example-animate-container {
+	/*  position:relative;
+  	height:100px;*/
+}
+
+.example-animate-container > * {
+	  display:block;
+	  width:100%;
+	  border:1px solid black;
+
+	  position:absolute;
+	  top:0;
+	  left:0;
+	  right:0;
+	  bottom:0;
+	  padding:10px;
+}
+
+.example-enter {
+	left:100%;
+}
+.example-enter.example-enter-active {
+  	left:0;
+}
+
+.example-leave { }
+.example-leave.example-leave-active {
+  	left:-100%;
+}
+</style>
+</head>
+<body>
+<div ng-view class="example-animate-container"
+      ng-animate="{enter: 'example-enter', leave: 'example-leave'}"></div>
+</body>
+</html>
