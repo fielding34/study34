@@ -10,7 +10,7 @@
         <style type="text/css">
             table {
                 border-collapse: collapse;
-                margin: auto;
+                margin: 50px auto;
             }
 
             table tr td {
@@ -24,8 +24,8 @@
 
             .round {
                 border-radius: 50%;
-                height: 40px;
-                width: 40px;
+                height: 120px;
+                width: 120px;
             }
 
             .white {
@@ -41,7 +41,7 @@
         <table>
             <tr ng-repeat="line in matrix">
                 <td ng-repeat="e in line track by $index" class="clickable" ng-click="play($parent.$index, $index)">
-                   <div class="round" ng-class="getClass($parent.$index, $index)"></div>
+                   <div class="round" ng-class="getClass($parent.$index, $index)">&nbsp;</div>
                 </td>
             </tr>
         </table>
