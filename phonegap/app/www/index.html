@@ -6,6 +6,8 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 
         <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="plugins/bootstrap3/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="plugins/awesome/css/font-awesome.min.css" />
         <title>App</title>
         <style type="text/css">
             table {
@@ -35,17 +37,41 @@
             .black {
                 background-color: black;
             }
+
+            .mobile-round {
+                border-radius: 50%;
+                width: 100%;
+            }
+
+            .onesquare {
+                widht: auto;
+                height: auto;
+                max-width: 100%;
+                max-height: 100%;
+                border-radius: 50%;
+            }
+
         </style>
     </head>
     <body ng-controller="AppCtrl">
-        <table>
+        <table style="width:900px;">
             <tr ng-repeat="line in matrix">
-                <td ng-repeat="e in line track by $index" class="clickable" ng-click="play($parent.$index, $index)">
+                <td ng-repeat="e in line track by $index" class="clickable" ng-click="play($parent.$index, $index)" style="text-align:center;">
+                    <!-- <i class="icon-circle icon-4x" style="margin:auto;"></div> -->
                    <div class="round" ng-class="getClass($parent.$index, $index)">&nbsp;</div>
                 </td>
             </tr>
         </table>
 
+        <div class="container">
+        <div class="row">
+            <div class="col-1"><i class="icon-circle icon-large"><i></div>
+            <div class="col-1"><i class="icon-circle icon-large"><i></div>
+            <div class="col-1"><i class="icon-circle icon-large"><i></div>
+            <div class="col-1"><i class="icon-circle icon-large"><i></div>
+            <div class="col-1"><i class="icon-circle icon-large"><i></div>
+        </div>
+    </div>
 
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>

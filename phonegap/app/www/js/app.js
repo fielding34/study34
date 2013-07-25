@@ -24,23 +24,30 @@ var app = angular.module('app', [])
 		}
 
 		var global = 0;
+		var color = {
+			none: 0,
+			white: 1,
+			black: 2
+		};
+
 		$scope.play = function(x, y) {
 			if ($scope.matrix[x][y] == 0) {
-				$scope.matrix[x][y] = global % 2 == 0 ? 1 : 2;
-				calculate(x, y);
+				var whichColor = global % 2 == 0 ? color.white : color.black;
+				$scope.matrix[x][y] = whichColor;
+				calculate(x, y, whichColor);
 				global++;
 				console.log('global: ' + global);
 			}
 		}
 
-		function calculate(x, y) {
+		function calculate(x, y, whichColor) {
 			for (var i = 0; i < 6; i++) {
 				for (var j = 0; j < 6; j++) {
 					var length = i > j ? 7 - i : 7 - j;
 					while (length >= 2) {
-						if (x >= i && x < i + length && j >= j && j < j + length) {
-							if (satisfy(i, j, length)) {
-								change(i, j, length);
+						if (x >= i && x < i + length && y >= j && y < j + length) {
+							if (symmetry(i, j, length)) {
+								occupy(i, j, length, whichColor);
 								return;
 							}
 						}
@@ -50,7 +57,9 @@ var app = angular.module('app', [])
 			}
 		}
 
-		function satisfy(x, y, length) {
+		function symmetry(x, y, length) {
+			var half = parseInt(length / 2);
+
 			for (var i = y; i < y + length; i++) {
 				if ($scope.matrix[x][i] == 0 ||
 					($scope.matrix[x][i] != $scope.matrix[x + length - 1][i])) {
@@ -61,16 +70,14 @@ var app = angular.module('app', [])
 			return true;
 		}
 
-		function change(x, y, length) {
-			var value = (global % 2 == 0 ? 1 : 2);
+		function occupy(x, y, length, whichColor) {
 			var x2 = x + length;
 			var y2 = y + length;
 			for (var i = x; i < x2; i++) {
 				for (var j = y; j < y2; j++) {
-					$scope.matrix[i][j] = value;
+					$scope.matrix[i][j] = whichColor;
 				}
 			}
-
 		}
 	}
 ]);
