@@ -65,10 +65,11 @@ var app = angular.module('app', [])
 			}
 			var black = 49 - white;
 			if (white > black) {
-				$scope.result = 'white win (white ' + white + '> black ' + black + ')'
+				$scope.result = 'white ';
 			} else {
-				$scope.result = 'black win (white ' + white + '< black ' + black + ')'
+				$scope.result = 'black '
 			}
+			$scope.result += 'win (white (' + white + ') v.s. black(' + black + ')';
 		}
 
 		function calculate(x, y, whichColor) {
