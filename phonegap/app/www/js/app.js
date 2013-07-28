@@ -6,6 +6,7 @@ var app = angular.module('app', [])
 		$scope.matrix = initMatrix();
 
 		function initMatrix() {
+			$scope.result = '';
 			var matrix = new Array(7);
 			for (var i = 0; i < 7; i++) {
 				matrix[i] = [0, 0, 0, 0, 0, 0, 0];
@@ -46,13 +47,8 @@ var app = angular.module('app', [])
 			if ($scope.matrix[x][y] == color.none) {
 				var whichColor = global % 2 == 0 ? color.white : color.black;
 				$scope.matrix[x][y] = whichColor;
-				calculate(x, y, whichColor);
 				global++;
-				console.log('global: ' + global);
-			}
-
-			if (global == 49) {
-				determineWhoWin();
+				calculate(x, y, whichColor);
 			}
 		}
 
@@ -73,24 +69,32 @@ var app = angular.module('app', [])
 		}
 
 		function calculate(x, y, whichColor) {
+			var temp = [];
+
 			for (var i = 0; i < 6; i++) {
 				for (var j = 0; j < 6; j++) {
 					var length = i > j ? 7 - i : 7 - j;
 					while (length >= 2) {
 						if (x >= i && x < i + length && y >= j && y < j + length) {
 							if (symmetry(i, j, length)) {
-								occupy(i, j, length, whichColor);
-								return;
+								temp.push({
+									'x': i,
+									'y': j,
+									'length': length
+								});
 							}
 						}
 						length--;
 					}
 				}
 			}
+
+			for (var i = 0; i < temp.length; i++) {
+				occupy(temp[i].x, temp[i].y, temp[i].length, whichColor);
+			}
 		}
 
 		function symmetry(x, y, length) {
-			// console.log(x + ', ' + y + ' (' + length + '), matrix[] ' + $scope.matrix);
 			return symmetryX(x, y, length) || symmetryY(x, y, length);
 		}
 
@@ -154,6 +158,9 @@ var app = angular.module('app', [])
 					for (var j = y; j < y2; j++) {
 						$scope.matrix[i][j] = whichColor;
 					}
+				}
+				if (global == 49) {
+					determineWhoWin();
 				}
 			}, 2000);
 		}
