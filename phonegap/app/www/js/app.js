@@ -50,6 +50,9 @@ var app = angular.module('app', [])
 				global++;
 				calculate(x, y, whichColor);
 			}
+			if (global == 49) {
+				determineWhoWin();
+			}
 		}
 
 		function determineWhoWin() {
